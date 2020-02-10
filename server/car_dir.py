@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 from __future__ import print_function
+from __future__ import division
+from past.utils import old_div
 import PCA9685 as servo
 import time                # Import necessary modules
 
 def Map(x, in_min, in_max, out_min, out_max):
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+	return old_div((x - in_min) * (out_max - out_min), (in_max - in_min)) + out_min
 
 def setup(busnum=None):
 	global leftPWM, rightPWM, homePWM, pwm

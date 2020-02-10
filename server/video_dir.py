@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import PCA9685 as servo
 import time                  # Import necessary modules
 
@@ -26,7 +29,7 @@ def setup(busnum=None):
 	Xmax = MaxPulse + offset_x
 	Ymin = MinPulse + offset_y
 	Ymax = MaxPulse + offset_y
-	home_x = (Xmax + Xmin)/2
+	home_x = old_div((Xmax + Xmin),2)
 	home_y = Ymin + 80
 	if busnum == None:
 		pwm = servo.PWM()                  # Initialize the servo controller.
@@ -87,8 +90,8 @@ def home_x_y():
 	pwm.write(15, 0, Current_y)
 
 def calibrate(x,y):
-	pwm.write(14, 0, (MaxPulse+MinPulse)/2+x)
-	pwm.write(15, 0, (MaxPulse+MinPulse)/2+y)
+	pwm.write(14, 0, old_div((MaxPulse+MinPulse),2)+x)
+	pwm.write(15, 0, old_div((MaxPulse+MinPulse),2)+y)
 
 def test():
 	while True:

@@ -11,7 +11,13 @@
 **********************************************************************
 '''
 from __future__ import print_function
+from __future__ import division
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import smbus
 import time
 import math
@@ -152,13 +158,13 @@ class PWM(object):
             self._check_i2c()
 
     def _check_i2c(self):
-        import commands
+        import subprocess
         bus_number = self._get_bus_number()
         print("\nYour Pi Rivision is: %s" % self._get_pi_revision())
         print("I2C bus number is: %s" % bus_number)
         print("Checking I2C device:")
         cmd = "ls /dev/i2c-%d" % bus_number
-        output = commands.getoutput(cmd)
+        output = subprocess.getoutput(cmd)
         print('Commands "%s" output:' % cmd)
         print(output)
         if '/dev/i2c-%d' % bus_number in output.split(' '):
@@ -166,7 +172,7 @@ class PWM(object):
         else:
             print("Seems like I2C has not been set. Use 'sudo raspi-config' to set I2C")
         cmd = "i2cdetect -y %s" % self.bus_number
-        output = commands.getoutput(cmd)
+        output = subprocess.getoutput(cmd)
         print("Your PCA9685 address is set to 0x%02X" % self.address)
         print("i2cdetect output:")
         print(output)
@@ -241,7 +247,7 @@ class PWM(object):
 
     def map(self, x, in_min, in_max, out_min, out_max):
         '''To map the value from arange to another'''
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+        return old_div((x - in_min) * (out_max - out_min), (in_max - in_min)) + out_min
 
     @property
     def debug(self):

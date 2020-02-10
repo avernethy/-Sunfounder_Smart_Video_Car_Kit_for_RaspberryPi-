@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from builtins import range
 import PCA9685 as servo
 import time                  # Import necessary modules
 
