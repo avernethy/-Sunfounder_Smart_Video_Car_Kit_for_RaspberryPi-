@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import RPi.GPIO as GPIO
 import PCA9685 as p
 import time    # Import necessary modules
@@ -27,7 +28,7 @@ pins = [Motor0_A, Motor0_B, Motor1_A, Motor1_B]
 # ===========================================================================
 def setSpeed(speed):
 	speed *= 40
-	print 'speed is: ', speed
+	print('speed is: ', speed)
 	pwm.write(EN_M0, 0, speed)
 	pwm.write(EN_M1, 0, speed)
 
@@ -76,7 +77,7 @@ def motor0(x):
 		GPIO.output(Motor0_A, GPIO.HIGH)
 		GPIO.output(Motor0_B, GPIO.LOW)
 	else:
-		print 'Config Error'
+		print('Config Error')
 
 def motor1(x):
 	if x == 'True':
@@ -120,11 +121,11 @@ def ctrl(status, direction=1):
 		elif direction == -1:  # Backward
 			backward()
 		else:
-			print 'Argument error! direction must be 1 or -1.'
+			print('Argument error! direction must be 1 or -1.')
 	elif status == 0: # Stop
 		stop()
 	else:
-		print 'Argument error! status must be 0 or 1.'
+		print('Argument error! status must be 0 or 1.')
 
 def test():
 	while True:
