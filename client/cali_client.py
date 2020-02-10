@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from Tkinter import *
+from future import standard_library
+standard_library.install_aliases()
+from tkinter import *
 from socket import *      # Import necessary modules
 import os
 
