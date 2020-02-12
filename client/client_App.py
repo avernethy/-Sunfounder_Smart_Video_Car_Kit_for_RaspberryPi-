@@ -26,49 +26,6 @@ tcpCliSock.connect(ADDR)                    # Connect with the server
 # ============================================================================= 
 def forward_fun(event):
     print('forward')
-<<<<<<< HEAD
-    tcpCliSock.send('forward')
-
-def backward_fun(event):
-    print('backward')
-    tcpCliSock.send('backward')
-
-def left_fun(event):
-    print('left')
-    tcpCliSock.send('left')
-
-def right_fun(event):
-    print('right')
-    tcpCliSock.send('right')
-
-def stop_fun(event):
-    print('stop')
-    tcpCliSock.send('stop')
-
-def home_fun(event):
-    print('home')
-    tcpCliSock.send('home')
-
-def x_increase(event):
-    print('x+')
-    tcpCliSock.send('x+')
-
-def x_decrease(event):
-    print('x-')
-    tcpCliSock.send('x-')
-
-def y_increase(event):
-    print('y+')
-    tcpCliSock.send('y+')
-
-def y_decrease(event):
-    print('y-')
-    tcpCliSock.send('y-')
-
-def xy_home(event):
-    print('xy_home')
-    tcpCliSock.send('xy_home')
-=======
     tcpCliSock.send(b'forward')
 
 def backward_fun(event):
@@ -110,22 +67,15 @@ def y_decrease(event):
 def xy_home(event):
 	print('xy_home')
 	tcpCliSock.send(b'xy_home')
->>>>>>> 937d395ea52f66c6c6dbe1d93108b6489c87bc02
 
 # =============================================================================
 # Exit the GUI program and close the network connection between the client 
 # and server.
 # =============================================================================
 def quit_fun(event):
-<<<<<<< HEAD
-    top.quit()
-    tcpCliSock.send('stop')
-    tcpCliSock.close()
-=======
 	top.quit()
 	tcpCliSock.send(b'stop')
 	tcpCliSock.close()
->>>>>>> 937d395ea52f66c6c6dbe1d93108b6489c87bc02
 
 # =============================================================================
 # Create buttons
@@ -210,14 +160,6 @@ top.bind('<KeyRelease-w>', stop_fun)
 spd = 50
 
 def changeSpeed(ev=None):
-<<<<<<< HEAD
-    tmp = 'speed'
-    global spd
-    spd = speed.get()
-    data = tmp + str(spd)  # Change the integers into strings and combine them with the string 'speed'. 
-    print('sendData = %s' % data)
-    tcpCliSock.send(data)  # Send the speed data to the server(Raspberry Pi)
-=======
 	tmp = 'speed'
 	global spd
 	spd = speed.get()
@@ -225,7 +167,6 @@ def changeSpeed(ev=None):
 	data_b = bytes(data, 'utf-8') 
 	print('sendData = %s' % data)
 	tcpCliSock.send(data_b)  # Send the speed data to the server(Raspberry Pi)
->>>>>>> 937d395ea52f66c6c6dbe1d93108b6489c87bc02
 
 label = Label(top, text='Speed:', fg='red')  # Create a label
 label.grid(row=6, column=0)                  # Label layout
