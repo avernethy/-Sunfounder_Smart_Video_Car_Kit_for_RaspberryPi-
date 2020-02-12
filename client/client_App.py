@@ -12,7 +12,7 @@ ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'ho
 top = Tk()   # Create a top window
 top.title('Sunfounder Raspberry Pi Smart Video Car')
 
-HOST = '192.168.0.147'    # Server(Raspberry Pi) IP address
+HOST = '192.168.254.28'    # Server(Raspberry Pi) IP address
 PORT = 21567
 BUFSIZ = 1024             # buffer size
 ADDR = (HOST, PORT)
@@ -25,48 +25,48 @@ tcpCliSock.connect(ADDR)                    # Connect with the server
 # car move forward.
 # ============================================================================= 
 def forward_fun(event):
-	print('forward')
-	tcpCliSock.send('forward')
+    print('forward')
+    tcpCliSock.send(b'forward')
 
 def backward_fun(event):
 	print('backward')
-	tcpCliSock.send('backward')
+	tcpCliSock.send(b'backward')
 
 def left_fun(event):
 	print('left')
-	tcpCliSock.send('left')
+	tcpCliSock.send(b'left')
 
 def right_fun(event):
 	print('right')
-	tcpCliSock.send('right')
+	tcpCliSock.send(b'right')
 
 def stop_fun(event):
 	print('stop')
-	tcpCliSock.send('stop')
+	tcpCliSock.send(b'stop')
 
 def home_fun(event):
 	print('home')
-	tcpCliSock.send('home')
+	tcpCliSock.send(b'home')
 
 def x_increase(event):
-	print('x+')
-	tcpCliSock.send('x+')
+    print('x+')
+    tcpCliSock.send(b'x+')
 
 def x_decrease(event):
-	print('x-')
-	tcpCliSock.send('x-')
+    print('x-')
+    tcpCliSock.send(b'x-')
 
 def y_increase(event):
 	print('y+')
-	tcpCliSock.send('y+')
+	tcpCliSock.send(b'y+')
 
 def y_decrease(event):
 	print('y-')
-	tcpCliSock.send('y-')
+	tcpCliSock.send(b'y-')
 
 def xy_home(event):
 	print('xy_home')
-	tcpCliSock.send('xy_home')
+	tcpCliSock.send(b'xy_home')
 
 # =============================================================================
 # Exit the GUI program and close the network connection between the client 
@@ -74,7 +74,7 @@ def xy_home(event):
 # =============================================================================
 def quit_fun(event):
 	top.quit()
-	tcpCliSock.send('stop')
+	tcpCliSock.send(b'stop')
 	tcpCliSock.close()
 
 # =============================================================================
@@ -163,9 +163,10 @@ def changeSpeed(ev=None):
 	tmp = 'speed'
 	global spd
 	spd = speed.get()
-	data = tmp + str(spd)  # Change the integers into strings and combine them with the string 'speed'. 
+	data = tmp + str(spd)  # Change the integers into strings and combine them with the string 'speed'.
+	data_b = bytes(data, 'utf-8') 
 	print('sendData = %s' % data)
-	tcpCliSock.send(data)  # Send the speed data to the server(Raspberry Pi)
+	tcpCliSock.send(data_b)  # Send the speed data to the server(Raspberry Pi)
 
 label = Label(top, text='Speed:', fg='red')  # Create a label
 label.grid(row=6, column=0)                  # Label layout
