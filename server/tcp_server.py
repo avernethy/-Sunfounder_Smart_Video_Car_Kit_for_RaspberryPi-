@@ -37,7 +37,9 @@ while True:
 
     while True:
         data = ''
-        data = tcpCliSock.recv(BUFSIZ)    # Receive data sent from the client. 
+        rdata = ''
+        rdata = tcpCliSock.recv(BUFSIZ)    # Receive data sent from the client. 
+        data = rdata.decode('utf-8') # Decode thedata
         # Analyze the command received and control the car accordingly.
         if not data:
             break
