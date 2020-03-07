@@ -96,6 +96,7 @@ while True:
             print('data =', data)
             angle = data.split('=')[1]
             try:
+                print('Angle: ',angle)
                 angle = int(angle)
                 car_dir.turn(angle)
             except:
